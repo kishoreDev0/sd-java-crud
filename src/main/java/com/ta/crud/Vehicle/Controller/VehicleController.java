@@ -8,6 +8,7 @@ import com.ta.crud.Vehicle.Entity.Vehicle;
 import com.ta.crud.Vehicle.Service.VehicleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+
 @Tag(name = "Vehicle API", description = "Operations related to vehicles")
 @RestController
 @RequestMapping("/vehicle")
@@ -48,4 +49,19 @@ public class VehicleController {
 
     }
 
+    @PostMapping()
+    public GenericResponse<Vehicle> createVehicleEntire(@RequestBody Vehicle vehicle) {
+
+        GenericResponse<Vehicle> Enteredvehicle = vehicleService.createVehicle(vehicle);
+        return Enteredvehicle;
+
+    }
+
+    @PutMapping("/{id}")
+    public GenericResponse<Vehicle> putMethodName(@PathVariable Long id, @RequestBody Vehicle vehicle ) {
+        
+        GenericResponse<Vehicle> Enteredvehicle = vehicleService.updateVehicleByVehicleNumber(vehicle, id);
+        return Enteredvehicle;
+
+    }
 }

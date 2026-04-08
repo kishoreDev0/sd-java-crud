@@ -10,11 +10,11 @@ import com.ta.crud.Vehicle.Entity.Vehicle;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle , Long> {
 
-    List<Vehicle> getAllVehicle();
+    // List<Vehicle> getAllVehicle();
 
     Optional<Vehicle> findById(Long id);
 
-    Optional<Vehicle> findByName(String name);
+    Optional<Vehicle> findByVehicleName(String name);
 
     int deleteById(int id);
 

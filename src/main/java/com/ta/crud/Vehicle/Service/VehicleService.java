@@ -22,50 +22,68 @@ public class VehicleService {
 
     public GenericResponse<Vehicle> createVehicle(Vehicle vehicle) {
 
-        Optional<Vehicle> existingVehicle = VehicleRepository.findByVehicleNumber(vehicle.getVehicleNumber());
+        try {
 
-        if (existingVehicle.isEmpty()) {
-            log.warn("No items found");
-            return genericResponseBuilder.info(200,
-                    "Vehicle with " + vehicle.getVehicleNumber() + " number is already entered");
+            Optional<Vehicle> existingVehicle = VehicleRepository.findByVehicleNumber(vehicle.getVehicleNumber());
+
+            if (existingVehicle.isEmpty()) {
+                log.warn("No items found");
+                return genericResponseBuilder.info(200,
+                        "Vehicle with " + vehicle.getVehicleNumber() + " number is already entered");
+            }
+
+            // Saving the vehicle
+            Vehicle vehicleCreated = VehicleRepository.save(vehicle);
+
+            return genericResponseBuilder.success(204,
+                    true,
+                    vehicleCreated,
+                    "Vehicles Entered succesfully");
+
+        } catch (Exception e) {
+
+            log.error("Vehical service has been failed" + e);
+            return genericResponseBuilder.error(200, e.getMessage());
+
         }
-
-        // Saving the vehicle
-        Vehicle vehicleCreated = VehicleRepository.save(vehicle);
-
-        return genericResponseBuilder.success(204,
-                true,
-                vehicleCreated,
-                "Vehicles Entered succesfully");
 
     }
 
-    public GenericResponse<Vehicle> updateVehicleByVehicleNumber(Vehicle vehicle) {
+    public GenericResponse<Vehicle> updateVehicleByVehicleNumber(Vehicle vehicle , Long id) {
 
-        Optional<Vehicle> existingVehicle = VehicleRepository.findByVehicleNumber(vehicle.getVehicleNumber());
+        try {
 
-        if (existingVehicle.isEmpty()) {
-            log.warn("No items found");
-            return genericResponseBuilder.info(200,
-                    "Vehicle with " + vehicle.getVehicleNumber() + " number is already entered");
+            Optional<Vehicle> existingVehicle = VehicleRepository.findByVehicleNumber(vehicle.getVehicleNumber());
+
+            if (existingVehicle.isEmpty()) {
+                log.warn("No items found");
+                return genericResponseBuilder.info(200,
+                        "Vehicle with " + vehicle.getVehicleNumber() + " number is already entered");
+            }
+
+            // Updating the vehicle details
+            existingVehicle.get().setVehicleName(vehicle.getVehicleName());
+            existingVehicle.get().setVehicleNumber(vehicle.getVehicleNumber());
+
+            Vehicle vehicleUpdated = VehicleRepository.save(existingVehicle.get());
+
+            return genericResponseBuilder.success(204,
+                    true,
+                    vehicleUpdated,
+                    "Vehicles Updated succesfully");
+
+        } catch (Exception e) {
+
+            log.error("Vehical service has been failed" + e);
+            return genericResponseBuilder.error(200, e.getMessage());
+
         }
-
-        // Updating the vehicle details
-        existingVehicle.get().setVehicleName(vehicle.getVehicleName());
-        existingVehicle.get().setVehicleNumber(vehicle.getVehicleNumber());
-
-        Vehicle vehicleUpdated = VehicleRepository.save(existingVehicle.get());
-
-        return genericResponseBuilder.success(204,
-                true,
-                vehicleUpdated,
-                "Vehicles Updated succesfully");
 
     }
 
     public GenericResponse<List<Vehicle>> getAllvehicle() {
         try {
-            List<Vehicle> vehicleList = VehicleRepository.getAllVehicle();
+            List<Vehicle> vehicleList = VehicleRepository.findAll();
             log.debug("Number of items present" + vehicleList.size());
             if (vehicleList.isEmpty()) {
                 log.warn("No items found");
@@ -105,7 +123,7 @@ public class VehicleService {
 
     public GenericResponse<Vehicle> getVehicleByName(String name) {
         try {
-            Optional<Vehicle> vehicle = VehicleRepository.findByName(name);
+            Optional<Vehicle> vehicle = VehicleRepository.findByVehicleName(name);
             if (vehicle.isEmpty()) {
                 log.info("No vehical with the name " + name + " found");
                 return genericResponseBuilder.error(200, "No items found");
