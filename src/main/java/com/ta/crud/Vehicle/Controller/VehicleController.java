@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import com.ta.crud.Generic.GenericResponse;
+import com.ta.crud.Vehicle.Dto.Request.CreateVehicleRequestDto;
 import com.ta.crud.Vehicle.Entity.Vehicle;
 import com.ta.crud.Vehicle.Service.VehicleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @Tag(name = "Vehicle API", description = "Operations related to vehicles")
 @RestController
@@ -49,7 +51,7 @@ public class VehicleController {
     }
 
     @PostMapping()
-    public GenericResponse<Vehicle> createVehicleEntire(@RequestBody Vehicle vehicle) {
+    public GenericResponse<Vehicle> createVehicleEntire(@RequestBody @Valid CreateVehicleRequestDto vehicle) {
 
         GenericResponse<Vehicle> Enteredvehicle = vehicleService.createVehicle(vehicle);
         return Enteredvehicle;

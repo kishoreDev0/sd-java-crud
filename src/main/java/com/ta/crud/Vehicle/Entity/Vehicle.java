@@ -13,8 +13,8 @@ public class Vehicle{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    
     private Long vehicleNumber ;
-
     private String vehicleName;
 
     private LocalDateTime createdAt;
@@ -28,6 +28,13 @@ public class Vehicle{
     public Vehicle(long id , Long vehicleNumber , String vehicleName ){
 
         this.id = id;
+        this.vehicleName =vehicleName;
+        this.vehicleNumber = vehicleNumber;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+     public Vehicle( Long vehicleNumber , String vehicleName ){
         this.vehicleName =vehicleName;
         this.vehicleNumber = vehicleNumber;
         this.createdAt = LocalDateTime.now();

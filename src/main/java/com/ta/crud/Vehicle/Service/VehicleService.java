@@ -8,6 +8,7 @@ import java.util.*;
 
 import com.ta.crud.Generic.GenericResponse;
 import com.ta.crud.Generic.GenericResponseBuilder;
+import com.ta.crud.Vehicle.Dto.Request.CreateVehicleRequestDto;
 import com.ta.crud.Vehicle.Entity.Vehicle;
 import com.ta.crud.Vehicle.Repository.VehicleRepository;
 import org.slf4j.Logger;
@@ -22,24 +23,26 @@ public class VehicleService {
 
     private static final Logger log = LoggerFactory.getLogger(VehicleService.class);
 
-    public GenericResponse<Vehicle> createVehicle(Vehicle vehicle) {
+    public GenericResponse<Vehicle> createVehicle( CreateVehicleRequestDto vehicle) {
 
         try {
 
-            Optional<Vehicle> existingVehicle = VehicleRepository.findByVehicleNumber(vehicle.getVehicleNumber());
+            Optional<Vehicle> existingVehicle = VehicleRepository.findByVehicleNumber(vehicle.vehicleNumber);
 
-            if (existingVehicle.isEmpty()) {
+            if (! existingVehicle.isEmpty()) {
                 log.warn("No items found");
                 return genericResponseBuilder.info(200,
-                        "Vehicle with " + vehicle.getVehicleNumber() + " number is already entered");
+                        "Vehicle with " + vehicle.vehicleNumber + " number is already entered");
             }
+            // creating the vehicle
+             Vehicle vehicleCreated = new Vehicle( vehicle.vehicleNumber , vehicle.vehiclename);
 
             // Saving the vehicle
-            Vehicle vehicleCreated = VehicleRepository.save(vehicle);
+            Vehicle vehicleSaved = VehicleRepository.save(vehicleCreated);
 
             return genericResponseBuilder.success(204,
                     true,
-                    vehicleCreated,
+                    vehicleSaved,
                     "Vehicles Entered succesfully");
 
         } catch (Exception e) {
