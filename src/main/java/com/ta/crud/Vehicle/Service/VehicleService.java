@@ -2,6 +2,8 @@ package com.ta.crud.Vehicle.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.*;
 
 import com.ta.crud.Generic.GenericResponse;
@@ -64,6 +66,7 @@ public class VehicleService {
             // Updating the vehicle details
             existingVehicle.get().setVehicleName(vehicle.getVehicleName());
             existingVehicle.get().setVehicleNumber(vehicle.getVehicleNumber());
+            existingVehicle.get().setUpdatedAt(LocalDateTime.now());
 
             Vehicle vehicleUpdated = VehicleRepository.save(existingVehicle.get());
 

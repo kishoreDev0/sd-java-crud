@@ -17,7 +17,9 @@ public class Vehicle{
 
     private String vehicleName;
 
-    private LocalDateTime createdAT ;
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 
     // Contrustor
     public Vehicle(){}
@@ -28,7 +30,8 @@ public class Vehicle{
         this.id = id;
         this.vehicleName =vehicleName;
         this.vehicleNumber = vehicleNumber;
-        this.createdAT = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     // Getters and Setters
@@ -54,6 +57,14 @@ public class Vehicle{
 
     public void setVehicleName(String vehicleName) {
         this.vehicleName = vehicleName;
+    }
+
+     public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime localDateTime) {
+        this.updatedAt = localDateTime;
     }
 
 }
