@@ -1,4 +1,4 @@
-package com.ta.crud.Exception.VehicleException;
+package com.ta.crud.Vehicle.Exception.VehicleException;
 
 public class VehiclesNotfound  extends RuntimeException{
 

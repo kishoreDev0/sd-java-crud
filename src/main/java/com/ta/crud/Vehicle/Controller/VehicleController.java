@@ -1,18 +1,19 @@
 package com.ta.crud.Vehicle.Controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import java.util.*;
+import org.springframework.web.bind.annotation.*;
 
 import com.ta.crud.Generic.GenericResponse;
+import com.ta.crud.Vehicle.Dto.Request.CreateVehicleRequestDto;
 import com.ta.crud.Vehicle.Entity.Vehicle;
 import com.ta.crud.Vehicle.Service.VehicleService;
 
+import java.util.*;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+
+@Tag(name = "Vehicle API", description = "Operations related to vehicles")
 @RestController
 @RequestMapping("/vehicle")
 public class VehicleController {
@@ -52,4 +53,19 @@ public class VehicleController {
 
     }
 
+    @PostMapping()
+    public GenericResponse<Vehicle> createVehicleEntire(@RequestBody @Valid CreateVehicleRequestDto vehicle) {
+
+        GenericResponse<Vehicle> Enteredvehicle = vehicleService.createVehicle(vehicle);
+        return Enteredvehicle;
+
+    }
+
+    @PutMapping("/{id}")
+    public GenericResponse<Vehicle> updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
+
+        GenericResponse<Vehicle> Enteredvehicle = vehicleService.updateVehicleByVehicleNumber(vehicle, id);
+        return Enteredvehicle;
+
+    }
 }
