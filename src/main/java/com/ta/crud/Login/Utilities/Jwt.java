@@ -1,4 +1,4 @@
-package com.ta.crud.Utilities;
+package com.ta.crud.Login.Utilities;
 
 import io.jsonwebtoken.*;
 
