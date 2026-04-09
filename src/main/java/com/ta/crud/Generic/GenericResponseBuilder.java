@@ -1,5 +1,8 @@
 package com.ta.crud.Generic;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class GenericResponseBuilder {
 
     public  <T> GenericResponse<T> success(int statusCode,Boolean status , T data, String message) {

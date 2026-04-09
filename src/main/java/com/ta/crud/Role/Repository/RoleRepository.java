@@ -11,6 +11,8 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
     
     Optional<Role> findById(long id);  
 
-    Optional<Role> findByRoleName(String name);  
+    Optional<Role> findByRoleName(String name); 
+    
+    
 
 }

@@ -1,6 +1,5 @@
 package com.ta.crud.Vehicle.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ta.crud.Generic.GenericResponse;
@@ -17,10 +16,20 @@ import org.slf4j.LoggerFactory;
 
 @Service
 public class VehicleService {
-    @Autowired
-    private VehicleRepository VehicleRepository;
+    
 
-    private GenericResponseBuilder genericResponseBuilder;
+    private final VehicleRepository VehicleRepository;
+    private final GenericResponseBuilder genericResponseBuilder;
+
+    public VehicleService(
+            VehicleRepository vehicleRepository,
+            GenericResponseBuilder genericResponseBuilder
+    ) {
+        this.VehicleRepository = vehicleRepository;
+        this.genericResponseBuilder = genericResponseBuilder;
+    }
+
+    
 
     private static final Logger log = LoggerFactory.getLogger(VehicleService.class);
 
@@ -29,6 +38,8 @@ public class VehicleService {
         try {
 
             Optional<Vehicle> existingVehicle = VehicleRepository.findByVehicleNumber(vehicle.vehicleNumber);
+
+             log.warn(vehicle.vehiclename + " " + vehicle.vehicleNumber);
 
             if (! existingVehicle.isEmpty()) {
                 log.warn("No items found");
