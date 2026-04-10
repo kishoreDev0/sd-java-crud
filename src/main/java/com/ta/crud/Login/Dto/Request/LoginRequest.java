@@ -10,7 +10,7 @@ public class LoginRequest {
     public String email;
 
     @NotNull(message = "Password is required")
-    public Long password;
+    public int password;
 
 }
 

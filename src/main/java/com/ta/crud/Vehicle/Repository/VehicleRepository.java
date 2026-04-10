@@ -9,16 +9,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VehicleRepository extends JpaRepository<Vehicle , Long> {
+public interface VehicleRepository extends JpaRepository<Vehicle , Integer> {
 
 
-    Optional<Vehicle> findById(Long id);
+    Optional<Vehicle> findById(int id);
 
     Optional<Vehicle> findByVehicleName(String name);
 
     int deleteById(int id);
 
-    Optional<Vehicle> findByVehicleNumber(Long vehicleNumber);
+    Optional<Vehicle> findByVehicleNumber(int vehicleNumber);
 
     
 } 

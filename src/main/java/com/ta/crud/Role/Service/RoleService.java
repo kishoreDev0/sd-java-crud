@@ -9,6 +9,8 @@ import java.util.Optional;
 
 import com.ta.crud.Generic.GenericResponse;
 import com.ta.crud.Generic.GenericResponseBuilder;
+import com.ta.crud.Role.Dto.Request.CreateRoleDto;
+import com.ta.crud.Role.Dto.Request.UpdateRole;
 import com.ta.crud.Role.Entity.Role;
 import com.ta.crud.Role.Repository.RoleRepository;
 import com.ta.crud.Vehicle.Service.VehicleService;
@@ -29,24 +31,24 @@ public class RoleService {
         this.genericResponseBuilder = genericResponseBuilder;
     }
 
-    public GenericResponse<Role> createRole(Role role) {
+    public GenericResponse<Role> createRole(CreateRoleDto role) {
 
         try {
-            Optional<Role> existingRole = roleRepository.findByRoleName(role.getRoleName());
+            Optional<Role> existingRole = roleRepository.findByRoleName(role.roleName);
             if (!existingRole.isEmpty()) {
-                log.debug("Role with name" + role.getRoleName() + " already exists");
-                return genericResponseBuilder.error(200, "Role with name" + role.getRoleName() + " already exists");
+                log.debug("Role with name" + role.roleName + " already exists");
+                return genericResponseBuilder.error(200, "Role with name" + role.roleName + " already exists");
             }
             // creating a entity
-            Role createdRole = new Role(role.getRoleName());
+            Role createdRole = new Role(role.roleName);
             // Saving the role entity
             Role savedRole = roleRepository.save(createdRole);
             return genericResponseBuilder.success(200, true, savedRole, "Role has been created successfully");
 
         } catch (Exception e) {
-            log.error("Role with name" + role.getRoleName() + " already exists");
+            log.error("Role with name" + role.roleName + " already exists");
             return genericResponseBuilder.error(200,
-                    "Role with name" + role.getRoleName() + " already exists" + e.getMessage());
+                    "Role with name " + role.roleName + " already exists" + e.getMessage());
         }
 
     }
@@ -69,16 +71,16 @@ public class RoleService {
         }
     }
 
-    public GenericResponse<Role> updateRole(Role role, Long id) {
+    public GenericResponse<Role> updateRole(UpdateRole role, int id) {
 
         try {
             Optional<Role> existingRole = roleRepository.findById(id);
-            if (existingRole.get() != null) {
+            if (existingRole.isEmpty()) {
                 log.warn("No items found with id " + id);
                 return genericResponseBuilder.error(200, "No items found with id " + id);
             }
 
-            existingRole.get().setRoleName(role.getRoleName());
+            existingRole.get().setRoleName(role.roleName);
             existingRole.get().setUpdatedAt(LocalDateTime.now());
 
             Role savedRole = roleRepository.save(existingRole.get());

@@ -66,7 +66,7 @@ public class VehicleService {
 
     }
 
-    public GenericResponse<Vehicle> updateVehicleByVehicleNumber(Vehicle vehicle , Long id) {
+    public GenericResponse<Vehicle> updateVehicleByVehicleNumber(Vehicle vehicle , int id) {
 
         try {
 
@@ -120,7 +120,7 @@ public class VehicleService {
 
     }
 
-    public GenericResponse<Vehicle> getVehicleById(Long id) {
+    public GenericResponse<Vehicle> getVehicleById(int id) {
         try {
             Optional<Vehicle> vehicle = VehicleRepository.findById(id);
             if (vehicle.isEmpty()) {
@@ -158,7 +158,7 @@ public class VehicleService {
         }
     }
 
-    public GenericResponse<Long> deleteVehicleById(Long id) {
+    public GenericResponse<Integer> deleteVehicleById(int id) {
         try {
 
             Optional<Vehicle> vehicle = VehicleRepository.findById(id);
