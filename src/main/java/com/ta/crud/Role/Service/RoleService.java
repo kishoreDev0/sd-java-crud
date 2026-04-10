@@ -7,12 +7,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import com.ta.crud.Generic.GenericResponse;
-import com.ta.crud.Generic.GenericResponseBuilder;
 import com.ta.crud.Role.Dto.Request.CreateRoleDto;
 import com.ta.crud.Role.Dto.Request.UpdateRole;
 import com.ta.crud.Role.Entity.Role;
 import com.ta.crud.Role.Repository.RoleRepository;
+import com.ta.crud.Utilities.Generic.GenericResponse;
+import com.ta.crud.Utilities.Generic.GenericResponseBuilder;
 import com.ta.crud.Vehicle.Service.VehicleService;
 import org.slf4j.Logger;
 

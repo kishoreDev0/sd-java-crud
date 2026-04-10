@@ -1,4 +1,4 @@
-package com.ta.crud.Generic;
+package com.ta.crud.Utilities.Generic;
 
 public class GenericResponse<T> {
     

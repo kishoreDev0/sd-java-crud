@@ -1,9 +1,9 @@
-package com.ta.crud.Configuration;
+package com.ta.crud.Utilities.Configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.ta.crud.Generic.GenericResponseBuilder;
+import com.ta.crud.Utilities.Generic.GenericResponseBuilder;
 
 @Configuration
 public class ApplicationConfiguration {

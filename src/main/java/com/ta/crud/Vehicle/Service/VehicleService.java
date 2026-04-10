@@ -2,8 +2,8 @@ package com.ta.crud.Vehicle.Service;
 
 import org.springframework.stereotype.Service;
 
-import com.ta.crud.Generic.GenericResponse;
-import com.ta.crud.Generic.GenericResponseBuilder;
+import com.ta.crud.Utilities.Generic.GenericResponse;
+import com.ta.crud.Utilities.Generic.GenericResponseBuilder;
 import com.ta.crud.Vehicle.Dto.Request.CreateVehicleRequestDto;
 import com.ta.crud.Vehicle.Entity.Vehicle;
 import com.ta.crud.Vehicle.Repository.VehicleRepository;

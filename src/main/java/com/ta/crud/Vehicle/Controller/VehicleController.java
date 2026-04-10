@@ -3,7 +3,7 @@ package com.ta.crud.Vehicle.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.ta.crud.Generic.GenericResponse;
+import com.ta.crud.Utilities.Generic.GenericResponse;
 import com.ta.crud.Vehicle.Dto.Request.CreateVehicleRequestDto;
 import com.ta.crud.Vehicle.Entity.Vehicle;
 import com.ta.crud.Vehicle.Service.VehicleService;
