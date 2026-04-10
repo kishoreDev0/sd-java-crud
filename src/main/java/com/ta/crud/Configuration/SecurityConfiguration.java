@@ -20,7 +20,7 @@ public class SecurityConfiguration {
                         "/v3/api-docs/**",
                         "/swagger-ui.html"
                 ).permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             )
             // ✅ FIX HERE
             .formLogin(form -> form.disable());
