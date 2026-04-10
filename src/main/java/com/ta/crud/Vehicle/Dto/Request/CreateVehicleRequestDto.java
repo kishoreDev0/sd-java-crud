@@ -9,6 +9,6 @@ public class CreateVehicleRequestDto {
     public String vehiclename;
 
     @NotNull(message = "Vehicle number is required")
-    public Long vehicleNumber;
+    public int vehicleNumber;
 
 }

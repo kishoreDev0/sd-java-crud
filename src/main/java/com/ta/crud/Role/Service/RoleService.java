@@ -48,7 +48,7 @@ public class RoleService {
         } catch (Exception e) {
             log.error("Role with name" + role.roleName + " already exists");
             return genericResponseBuilder.error(200,
-                    "Role with name" + role.roleName + " already exists" + e.getMessage());
+                    "Role with name " + role.roleName + " already exists" + e.getMessage());
         }
 
     }
@@ -71,11 +71,11 @@ public class RoleService {
         }
     }
 
-    public GenericResponse<Role> updateRole(UpdateRole role, Long id) {
+    public GenericResponse<Role> updateRole(UpdateRole role, int id) {
 
         try {
             Optional<Role> existingRole = roleRepository.findById(id);
-            if (existingRole.get() != null) {
+            if (existingRole.isEmpty()) {
                 log.warn("No items found with id " + id);
                 return genericResponseBuilder.error(200, "No items found with id " + id);
             }

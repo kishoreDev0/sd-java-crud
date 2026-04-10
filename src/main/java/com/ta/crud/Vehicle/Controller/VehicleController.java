@@ -30,15 +30,15 @@ public class VehicleController {
     }
 
     @DeleteMapping
-    public GenericResponse<Long> deleteVehicleById(long id) {
+    public GenericResponse<Integer> deleteVehicleById(int id) {
 
-        GenericResponse<Long> vehicleId = vehicleService.deleteVehicleById(id);
+        GenericResponse<Integer> vehicleId = vehicleService.deleteVehicleById(id);
         return vehicleId;
 
     }
 
     @GetMapping("/{id}")
-    public GenericResponse<Vehicle> getVehicleByName(@RequestParam Long id) {
+    public GenericResponse<Vehicle> getVehicleByName(@RequestParam int id) {
 
         GenericResponse<Vehicle> vehicle = vehicleService.getVehicleById(id);
         return vehicle;
@@ -62,7 +62,7 @@ public class VehicleController {
     }
 
     @PutMapping("/{id}")
-    public GenericResponse<Vehicle> updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
+    public GenericResponse<Vehicle> updateVehicle(@PathVariable int id, @RequestBody Vehicle vehicle) {
 
         GenericResponse<Vehicle> Enteredvehicle = vehicleService.updateVehicleByVehicleNumber(vehicle, id);
         return Enteredvehicle;

@@ -38,8 +38,8 @@ public class RoleController {
         GenericResponse<Role> roleSaved = roleService.createRole(createRole);
         return roleSaved;
     }
-    @PutMapping("path/{id}")
-    public GenericResponse<Role> updateRole(@PathVariable Long id, @RequestBody UpdateRole role) {
+    @PutMapping("/{id}")
+    public GenericResponse<Role> updateRole(@PathVariable int id, @RequestBody UpdateRole role) {
         GenericResponse<Role> roleUpdated= roleService.updateRole(role,id);
         return roleUpdated;
     }

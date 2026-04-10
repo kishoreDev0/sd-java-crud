@@ -11,10 +11,10 @@ public class Vehicle{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     
-    private Long vehicleNumber ;
+    private int vehicleNumber ;
     private String vehicleName;
 
     private LocalDateTime createdAt;
@@ -25,7 +25,7 @@ public class Vehicle{
     public Vehicle(){}
 
     // Args constructor
-    public Vehicle(long id , Long vehicleNumber , String vehicleName ){
+    public Vehicle(int id , int vehicleNumber , String vehicleName ){
 
         this.id = id;
         this.vehicleName =vehicleName;
@@ -34,7 +34,7 @@ public class Vehicle{
         this.updatedAt = LocalDateTime.now();
     }
 
-     public Vehicle( Long vehicleNumber , String vehicleName ){
+     public Vehicle( int vehicleNumber , String vehicleName ){
         this.vehicleName =vehicleName;
         this.vehicleNumber = vehicleNumber;
         this.createdAt = LocalDateTime.now();
@@ -42,19 +42,19 @@ public class Vehicle{
     }
 
     // Getters and Setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getVehicleNumber() {
+    public int getVehicleNumber() {
         return vehicleNumber;
     }
 
-    public void setVehicleNumber(Long vehicleNumber) {
+    public void setVehicleNumber(int vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
     }
 

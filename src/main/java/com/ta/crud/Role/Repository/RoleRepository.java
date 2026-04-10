@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ta.crud.Role.Entity.Role;
 
 
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role,Integer> {
     
-    Optional<Role> findById(long id);  
+    Optional<Role> findById(int id);  
 
     Optional<Role> findByRoleName(String name); 
     
