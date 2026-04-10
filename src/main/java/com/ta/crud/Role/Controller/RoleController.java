@@ -4,12 +4,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ta.crud.Generic.GenericResponse;
 import com.ta.crud.Role.Dto.Request.CreateRoleDto;
 import com.ta.crud.Role.Dto.Request.UpdateRole;
 import com.ta.crud.Role.Entity.Role;
 import com.ta.crud.Role.Repository.RoleRepository;
 import com.ta.crud.Role.Service.RoleService;
+import com.ta.crud.Utilities.Generic.GenericResponse;
+
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
