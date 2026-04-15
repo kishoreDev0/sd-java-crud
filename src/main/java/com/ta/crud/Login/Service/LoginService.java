@@ -16,16 +16,13 @@ import com.ta.crud.User.Repository.UserRepository;
 import com.ta.crud.Utilities.Configuration.PasswordConfiguration;
 import com.ta.crud.Utilities.Generic.GenericResponse;
 import com.ta.crud.Utilities.Generic.GenericResponseBuilder;
-import com.ta.crud.Vehicle.Service.VehicleService;
 
 @Service
 public class LoginService {
 
     private UserRepository userRepository;
-    private RoleRepository roleRepository;
     private final GenericResponseBuilder genericResponseBuilder;
     private static final Logger log = LoggerFactory.getLogger(LoginService.class);
-    private PasswordConfiguration passwordConfiguration;
     private Jwt jwtUtil;
 
     @Autowired
@@ -34,8 +31,6 @@ public class LoginService {
     LoginService(UserRepository userRepository, GenericResponseBuilder genericResponseBuilder,
             RoleRepository roleRepository, PasswordConfiguration passwordConfiguration, Jwt jwtUtil) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordConfiguration = passwordConfiguration;
         this.genericResponseBuilder = genericResponseBuilder;
         this.jwtUtil = jwtUtil;
     }
