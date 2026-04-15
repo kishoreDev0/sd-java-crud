@@ -11,6 +11,8 @@ import com.ta.crud.Role.Repository.RoleRepository;
 import com.ta.crud.Role.Service.RoleService;
 import com.ta.crud.Utilities.Generic.GenericResponse;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/role")
+@Tag(name = "Role Api", description = "Operations related to roles")
 public class RoleController {
 
     private RoleService roleService;

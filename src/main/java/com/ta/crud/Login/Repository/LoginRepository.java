@@ -1,5 +1,12 @@
 package com.ta.crud.Login.Repository;
 
-public class LoginRepository {
-    
-}
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ta.crud.User.Entity.User;
+
+public interface LoginRepository extends JpaRepository<User,Integer>{
+
+    // Optional<User> 
+} 
