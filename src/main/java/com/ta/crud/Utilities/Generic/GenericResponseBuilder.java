@@ -8,7 +8,7 @@ public class GenericResponseBuilder {
     public  <T> GenericResponse<T> success(int statusCode,Boolean status , T data, String message) {
         return new GenericResponse<>(statusCode, status, message, data);
     }
-
+    
     public  <T> GenericResponse<T> noContent(int statusCode, T data, String message) {
         return new GenericResponse<>(statusCode, true, message, data);
     }

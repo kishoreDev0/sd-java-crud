@@ -1,21 +1,23 @@
 package com.ta.crud.Login.Controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ta.crud.Login.Dto.Request.LoginRequest;
-import com.ta.crud.Login.Dto.Request.SignupRequest;
-import com.ta.crud.Role.Repository.RoleRepository;
+import com.ta.crud.Login.Dto.Response.LoginResponseDto;
+import com.ta.crud.Login.Service.LoginService;
 import com.ta.crud.User.Dto.Request.CreateUser;
 import com.ta.crud.User.Entity.User;
-import com.ta.crud.User.Repository.UserRepository;
 import com.ta.crud.User.Service.UserService;
 import com.ta.crud.Utilities.Generic.GenericResponse;
-import com.ta.crud.Utilities.Generic.GenericResponseBuilder;
+import com.ta.crud.Vehicle.Service.VehicleService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/")
@@ -23,14 +25,17 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class LoginController {
 
     private UserService userService;
+    private LoginService loginService;
 
-    LoginController(UserService userService) {
+    LoginController(UserService userService ,LoginService loginService) {
         this.userService = userService;
+        this.loginService = loginService;
     }
 
     @PostMapping("/login")
-    public void Login(@RequestBody LoginRequest loginRequest) {
-        
+    public GenericResponse<LoginResponseDto> Login(@RequestBody LoginRequest loginRequest) {
+        GenericResponse<LoginResponseDto> loginUser = loginService.login(loginRequest);
+        return loginUser;
 
     }
 
@@ -40,7 +45,7 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public GenericResponse<User> SignUp(@RequestBody CreateUser createUser) {
+    public GenericResponse<User> SignUp(@RequestBody @Valid CreateUser createUser) {
 
         // checking the user exist or not
         GenericResponse<User> createdUserResponse = userService.createUser(createUser);

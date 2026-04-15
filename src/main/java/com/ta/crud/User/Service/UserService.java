@@ -5,9 +5,9 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.ta.crud.User.Repository.UserRepository;
-import com.ta.crud.Utilities.Functions.AESUtil;
 import com.ta.crud.Utilities.Generic.GenericResponse;
 import com.ta.crud.Utilities.Generic.GenericResponseBuilder;
 import com.ta.crud.Vehicle.Service.VehicleService;
@@ -23,11 +23,14 @@ public class UserService {
     private RoleRepository roleRepository;
     private final GenericResponseBuilder genericResponseBuilder;
     private static final Logger log = LoggerFactory.getLogger(VehicleService.class);
+    private final PasswordEncoder passwordEncoder;
 
-    UserService(UserRepository userRepository, GenericResponseBuilder genericResponseBuilder,RoleRepository roleRepository) {
+    UserService(UserRepository userRepository, GenericResponseBuilder genericResponseBuilder,
+            RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.genericResponseBuilder = genericResponseBuilder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public GenericResponse<List<User>> getAllUsers() {
@@ -100,39 +103,42 @@ public class UserService {
     }
 
     // Creating a user
-     public GenericResponse<User> createUser(CreateUser createUserDto) {
+    public GenericResponse<User> createUser(CreateUser createUserDto) {
         try {
 
             // Email checking
-            Optional<User> existingEmail= userRepository.findByEmail(createUserDto.email);
-            if (existingEmail.isEmpty()) {
-                log.info("No user with the email " + createUserDto.email + " found");
-                return genericResponseBuilder.error(200, "User with email " + createUserDto.email + " not found");
+            Optional<User> existingEmail = userRepository.findByEmail(createUserDto.email);
+            if (existingEmail.isPresent()) {
+                log.info("Email with" + createUserDto.email + " ");
+                return genericResponseBuilder.error(200,
+                        "User with email " + createUserDto.email + " already present");
             }
 
             // Email phoneNumber
-            Optional<User> existingPhone= userRepository.findBymobileNumber(createUserDto.mobileNumber);
-            if (existingPhone.isEmpty()) {
-                log.info("No user with the phone " + createUserDto.mobileNumber + " found");
-                return genericResponseBuilder.error(200, "User with phone " +  createUserDto.mobileNumber + " not found");
+            Optional<User> existingPhone = userRepository.findBymobileNumber(createUserDto.mobileNumber);
+            if (existingPhone.isPresent()) {
+                log.info("Phone with " + createUserDto.mobileNumber + " With already present");
+                return genericResponseBuilder.error(200,
+                        "User with phone " + createUserDto.mobileNumber + " already present");
             }
 
             // Chwcking exiting role
             Optional<Role> exisitingRole = roleRepository.findById(createUserDto.role);
 
             // Encrypting password
-            String encryptedPass = AESUtil.encrypt(createUserDto.password);
-            User user = new User(createUserDto.firstName, createUserDto.lastName,createUserDto.email,exisitingRole.get(),true, encryptedPass,createUserDto.mobileNumber);
-
+            User user = new User(createUserDto.firstName, createUserDto.lastName, createUserDto.email,
+                    exisitingRole.get(), true, passwordEncoder.encode(createUserDto.password),
+                    createUserDto.mobileNumber);
+                    User savedUser  = userRepository.save(user);
 
             return genericResponseBuilder.success(204,
                     true,
-                    user,
+                    savedUser,
                     "User has successfully created");
         } catch (Exception e) {
             log.error("User service has been failed" + e);
             return genericResponseBuilder.error(200, e.getMessage());
         }
     }
-    
+
 }
