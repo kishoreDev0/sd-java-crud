@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ta.crud.Role.Dto.Request.CreateRoleDto;
 import com.ta.crud.Role.Dto.Request.UpdateRole;
 import com.ta.crud.Role.Entity.Role;
-import com.ta.crud.Role.Repository.RoleRepository;
 import com.ta.crud.Role.Service.RoleService;
 import com.ta.crud.Utilities.Generic.GenericResponse;
 
