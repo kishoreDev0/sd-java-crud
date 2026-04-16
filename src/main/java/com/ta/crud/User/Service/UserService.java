@@ -22,7 +22,7 @@ public class UserService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private final GenericResponseBuilder genericResponseBuilder;
-    private static final Logger log = LoggerFactory.getLogger(VehicleService.class);
+    private static final Logger log = LoggerFactory.getLogger(UserService.class);
     private final PasswordEncoder passwordEncoder;
 
     UserService(UserRepository userRepository, GenericResponseBuilder genericResponseBuilder,
